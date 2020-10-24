@@ -38,10 +38,10 @@ namespace APINetCore.Persistence
             modelBuilder.Entity<ItensComanda>()
                  .HasKey(a => a.Id);
 
-            modelBuilder.Entity<ItensComanda>()
-                .HasOne(p => p.Produto)
-                .WithOne()
-                .HasForeignKey<Produtos>(b => b.Id);
+            //modelBuilder.Entity<ItensComanda>()
+            //    .HasOne(p => p.Produto)
+            //    .WithOne();
+                //.HasForeignKey<Produtos>(b => b.Id);
 
             modelBuilder.Entity<NotaFiscal>()
                 .HasKey(a => a.Id);
@@ -58,6 +58,10 @@ namespace APINetCore.Persistence
             modelBuilder.Entity<Produtos>()
                 .HasKey(a => a.Id);
 
+            //modelBuilder.Entity<Produtos>()
+                //.HasOne(c =>c.)
+                //.WithOne();
+                //.HasForeignKey<Produtos>(b => b.Id);
 
 
 

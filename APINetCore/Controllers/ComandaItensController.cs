@@ -10,57 +10,58 @@ using Microsoft.AspNetCore.Mvc;
 namespace APINetCore.Controllers
 {
     [ApiController]
-    [Route("api/comanda")]
-    public class ComandaController : ControllerBase
+    [Route("api/comandaitens")]
+    public class ComandaItensController : ControllerBase
     {
         private readonly APIDbContext _DbContext;
-        public ComandaController(APIDbContext DbContext)
+
+        public ComandaItensController(APIDbContext DbContext)
         {
             _DbContext = DbContext;
         }
 
-        // api/comanda
+        // api/comandaitens
         [HttpGet]
         public IActionResult Get()
         {
-            var comanda = _DbContext.Comandas.ToList();
+            var comandaItens = _DbContext.ComandaItens.ToList();
 
-            return Ok(comanda);
+            return Ok(comandaItens);
         }
 
-        // api/comanda/4
-        [HttpGet("{id}")]
+        // api/comandaitens/4
+        [HttpGet("{idComanda}")]
         public IActionResult Get(int id)
         {
-            var comanda = _DbContext.Comandas.SingleOrDefault(u => u.Id == id);
+            var comandaItens = _DbContext.ComandaItens.SingleOrDefault(u => u.IdComanda == id);
 
-            if (comanda == null)
+            if (comandaItens == null)
             {
                 return NotFound();
             }
 
-            return Ok(comanda);
+            return Ok(comandaItens);
         }
 
-        // api/comanda
+        // api/comandaitens
         [HttpPost]
-        public IActionResult Post()
+        public IActionResult Post(int idComanda,int idProduto,int qtde)
         {
-            var comanda = new Comanda(DateTime.Now);
-            _DbContext.Comandas.Add(comanda);
+            var comandaItem = new ItensComanda(idComanda, idProduto, qtde);
+            _DbContext.ComandaItens.Add(comandaItem);
             _DbContext.SaveChanges();
-            
+
             return NoContent();
         }
 
-        // api/comanda/4
+        // api/comandaitens/4
         [HttpPut("{id}")]
         public IActionResult Put(int id)
         {
             return Ok();
         }
 
-        // api/comanda/4
+        // api/comandaitens/4
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {

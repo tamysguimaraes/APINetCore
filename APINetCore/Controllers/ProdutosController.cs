@@ -10,57 +10,57 @@ using Microsoft.AspNetCore.Mvc;
 namespace APINetCore.Controllers
 {
     [ApiController]
-    [Route("api/comanda")]
-    public class ComandaController : ControllerBase
+    [Route("api/produto")]
+    
+    public class ProdutosController : ControllerBase
     {
         private readonly APIDbContext _DbContext;
-        public ComandaController(APIDbContext DbContext)
+        public ProdutosController(APIDbContext DbContext)
         {
             _DbContext = DbContext;
         }
 
-        // api/comanda
+        // api/produto
         [HttpGet]
         public IActionResult Get()
         {
-            var comanda = _DbContext.Comandas.ToList();
+            var produtos = _DbContext.Produtos.ToList();
 
-            return Ok(comanda);
+            return Ok(produtos);
         }
 
-        // api/comanda/4
+        // api/produto/4
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
-            var comanda = _DbContext.Comandas.SingleOrDefault(u => u.Id == id);
+            var produtos = _DbContext.Produtos.SingleOrDefault(u => u.Id == id);
 
-            if (comanda == null)
+            if (produtos == null)
             {
                 return NotFound();
             }
 
-            return Ok(comanda);
+            return Ok(produtos);
         }
 
-        // api/comanda
+        // api/produto
         [HttpPost]
-        public IActionResult Post()
+        public IActionResult Post([FromBody] Produtos produtos)
         {
-            var comanda = new Comanda(DateTime.Now);
-            _DbContext.Comandas.Add(comanda);
+            _DbContext.Produtos.Add(produtos);
             _DbContext.SaveChanges();
-            
+
             return NoContent();
         }
 
-        // api/comanda/4
+        // api/produto/4
         [HttpPut("{id}")]
         public IActionResult Put(int id)
         {
             return Ok();
         }
 
-        // api/comanda/4
+        // api/produto/4
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {

@@ -13,6 +13,7 @@ namespace APINetCore.Entidades
         public Comanda(DateTime dtAbertura)
         {
             this.dtAbertura = dtAbertura;
+            this.dtFechamento = DateTime.MaxValue;
             this.statusComanda = StatusComandaEnum.Aberta;
         }
 
